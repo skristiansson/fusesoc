@@ -22,9 +22,11 @@ class Launcher:
             raise RuntimeError("Error: Command " + self.cmd + " not found. Make sure it is in $PATH")
         except subprocess.CalledProcessError:
             if self.stderr is None:
-                self.stderr = "stderr"
+                out = "stderr"
+            else:
+                out = self.stderr.name
             if self.errormsg is None:
-                self.errormsg = '"' + str(self) + '" exited with an error code. See ' + self.stderr + ' for details'
+                self.errormsg = '"' + str(self) + '" exited with an error code. See ' + out + ' for details'
             raise RuntimeError(self.errormsg)
 
     def __str__(self):
