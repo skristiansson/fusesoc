@@ -48,9 +48,11 @@ class SimulatorVerilator(Simulator):
         args += ['-f', self.verilator_file]
         args += ['--top-module', 'orpsoc_top']
         args += ['--exe']
-        args += ['-LDFLAGS ' + l for l in self.verilator.libs]
-        args += ['-CFLAGS ' + '-I' + i for i in self.verilator.include_dirs]
+        args += ['-LDFLAGS "']
         args += [os.path.join(self.sim_root, s) for s in self.object_files]
+        args += [l for l in self.verilator.libs]
+        args += ['"']
+        args += ['-CFLAGS ' + '-I' + i for i in self.verilator.include_dirs]
         args += [self.verilator.tb_toplevel]
         args += self.verilator.verilator_options
 
