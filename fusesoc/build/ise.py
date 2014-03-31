@@ -24,7 +24,8 @@ par: map
 	par -ol high -w $(DESIGN_NAME).ncd $(DESIGN_NAME)-routed.ncd
 
 bitgen: par
-	bitgen -g LCK_cycle:6 -g Binary:Yes -w $(DESIGN_NAME)-routed.ncd $(DESIGN_NAME).bit
+#	bitgen -g LCK_cycle:6 -g Binary:Yes -w $(DESIGN_NAME)-routed.ncd $(DESIGN_NAME).bit
+	bitgen -g StartUpClk:JtagClk -w $(DESIGN_NAME)-routed.ncd $(DESIGN_NAME).bit
 
 timingreport: $(DESIGN_NAME)-routed.ncd
 	trce -u 1000 -e 1000 $< $(DESIGN_NAME).pcf
